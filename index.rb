@@ -17,7 +17,7 @@ class LinkedList
       puts 'empty list'
     else
       node = @head
-      until node == nil
+      until node.nil?
         print "#{node.data} -> "
         node = node.next_value
       end
@@ -26,16 +26,16 @@ class LinkedList
   end
 
   def append(value)
-    if @head.nil?
-      @head = Node.new(value)
-    else
-      node = @head.next_value
-      count = 0
-      until node == nil
-        node = node.next_value
-        count += 1
-    end
-    # @head.next_value = Node.new(value)
+    return @head = Node.new(value) if @head.nil?   
+
+    @head = traversal(@head, value)
+  end
+
+  def traversal(node, value)
+    return Node.new(value) if node.nil?
+
+    node.next_value = traversal(node.next_value, value)
+    node
   end
 
   def prepend(value)
@@ -67,4 +67,5 @@ linked = LinkedList.new
 linked.prepend(20)
 linked.prepend(21)
 linked.prepend(30)
+linked.append(5)
 linked.inspect_list
