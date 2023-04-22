@@ -13,33 +13,58 @@ class LinkedList
   end
 
   def inspect_list
-    p @head.pointer
+    if @head.nil?
+      puts 'empty list'
+    else
+      node = @head
+      until node == nil
+        print "#{node.data} -> "
+        node = node.next_value
+      end
+      print "nil\n"
+    end
   end
 
   def append(value)
     if @head.nil?
       @head = Node.new(value)
     else
-      @head.pointer = Node.new(value)
+      node = @head.next_value
+      count = 0
+      until node == nil
+        node = node.next_value
+        count += 1
+    end
+    # @head.next_value = Node.new(value)
+  end
+
+  def prepend(value)
+    if @head.nil?
+      @head = Node.new(value)
+    else
+      node = @head
+      @head = Node.new(value)
+      @head.next_value = node
     end
   end
 end
 
 # nodes for linked lists
 class Node
-  attr_accessor :data, :pointer
+  attr_accessor :data, :next_value
 
-  def initialize(data = nil, pointer = nil)
+  def initialize(data = nil, next_value = nil)
     @data = data
-    @pointer = pointer
+    @next_value = next_value
   end
 
   def inspect_value
-    puts "#{data} -> #{pointer}"
+    puts "#{data} -> #{next_value.data}"
   end
 end
 
-linked = LinkedList.new(5)
-linked.inspect_list
-linked.append(19)
+linked = LinkedList.new
+linked.prepend(20)
+linked.prepend(21)
+linked.prepend(30)
 linked.inspect_list
