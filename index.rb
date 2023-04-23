@@ -26,7 +26,7 @@ class LinkedList
   end
 
   def append(value)
-    return @head = Node.new(value) if @head.nil?   
+    return @head = Node.new(value) if @head.nil?
 
     @head = traversal(@head, value)
   end
@@ -47,6 +47,16 @@ class LinkedList
       @head.next_value = node
     end
   end
+
+  def size
+    count = 0
+    node = @head
+    until node.nil?
+      node = node.next_value
+      count += 1
+    end
+    puts count
+  end
 end
 
 # nodes for linked lists
@@ -66,6 +76,7 @@ end
 linked = LinkedList.new
 linked.prepend(20)
 linked.prepend(21)
-linked.prepend(30)
 linked.append(5)
+linked.append(10)
+linked.size
 linked.inspect_list
