@@ -35,6 +35,7 @@ class LinkedList
     return Node.new(value) if node.nil?
 
     node.next_value = traversal(node.next_value, value)
+    # executed during unwinding
     node
   end
 
@@ -57,6 +58,14 @@ class LinkedList
     end
     puts count
   end
+
+  def tail
+    node = @head
+    until node.next_value.nil?
+      node = node.next_value
+    end
+    puts node.data
+  end
 end
 
 # nodes for linked lists
@@ -78,5 +87,5 @@ linked.prepend(20)
 linked.prepend(21)
 linked.append(5)
 linked.append(10)
-linked.size
+linked.tail
 linked.inspect_list
