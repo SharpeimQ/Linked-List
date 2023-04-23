@@ -12,13 +12,13 @@ class LinkedList
     end
   end
 
-  def inspect_list
+  def to_s
     if @head.nil?
       puts 'empty list'
     else
       node = @head
       until node.nil?
-        print "#{node.data} -> "
+        print "(#{node.data}) -> "
         node = node.next_value
       end
       print "nil\n"
@@ -101,6 +101,21 @@ class LinkedList
     end
     puts result
   end
+
+  def find(value)
+    return false if @head.nil?
+
+    count = 0
+    node = @head
+    until node.nil?
+      break if node.data == value
+
+      count += 1
+      node.next_value.nil? ? count = nil : nil
+      node = node.next_value
+    end
+    p count
+  end
 end
 
 # nodes for linked lists
@@ -124,6 +139,5 @@ linked.append('a')
 linked.append('b')
 linked.append('c')
 linked.append('d')
-linked.pop
-linked.contains?('a')
-linked.inspect_list
+linked.find('10')
+linked.to_s
