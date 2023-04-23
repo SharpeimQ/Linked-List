@@ -28,13 +28,13 @@ class LinkedList
   def append(value)
     return @head = Node.new(value) if @head.nil?
 
-    @head = traversal(@head, value)
+    @head = append_h(@head, value)
   end
 
-  def traversal(node, value)
+  def append_h(node, value)
     return Node.new(value) if node.nil?
 
-    node.next_value = traversal(node.next_value, value)
+    node.next_value = append_h(node.next_value, value)
     # executed during unwinding
     node
   end
@@ -66,6 +66,18 @@ class LinkedList
     end
     puts node.data
   end
+
+  def at(index)
+    i = 0
+    node = @head
+    until i == index
+      node = node.next_value
+      i += 1
+    end
+    puts node.data
+  end
+
+  
 end
 
 # nodes for linked lists
@@ -87,5 +99,5 @@ linked.prepend(20)
 linked.prepend(21)
 linked.append(5)
 linked.append(10)
-linked.tail
+linked.at(2)
 linked.inspect_list
