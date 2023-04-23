@@ -89,6 +89,18 @@ class LinkedList
     node.next_value = pop_h(node.next_value)
     node
   end
+
+  def contains?(value)
+    return false if @head.nil?
+
+    result = false
+    node = @head
+    until node.nil?
+      node.data == value ? result = true : result
+      node = node.next_value
+    end
+    puts result
+  end
 end
 
 # nodes for linked lists
@@ -108,6 +120,10 @@ end
 linked = LinkedList.new
 linked.prepend(20)
 linked.prepend(21)
-linked.append(5)
+linked.append('a')
+linked.append('b')
+linked.append('c')
+linked.append('d')
 linked.pop
+linked.contains?('a')
 linked.inspect_list
