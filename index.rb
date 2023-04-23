@@ -77,7 +77,18 @@ class LinkedList
     puts node.data
   end
 
-  
+  def pop
+    return nil if @head.nil?
+
+    @head = pop_h(@head)
+  end
+
+  def pop_h(node)
+    return nil if node.next_value.nil?
+
+    node.next_value = pop_h(node.next_value)
+    node
+  end
 end
 
 # nodes for linked lists
@@ -98,6 +109,5 @@ linked = LinkedList.new
 linked.prepend(20)
 linked.prepend(21)
 linked.append(5)
-linked.append(10)
-linked.at(2)
+linked.pop
 linked.inspect_list
